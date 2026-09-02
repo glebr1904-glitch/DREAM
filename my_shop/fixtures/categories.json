@@ -1,0 +1,154 @@
+[
+{
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+        "name": "Все товары",
+        "slug": "all"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+        "name": "Cветодиодная лента BASЕ",
+        "slug": "cvetodiodnaya-lenta-base"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+        "name": "Cветодиодная лента CCT",
+        "slug": "cvetodiodnaya-lenta-cct"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+        "name": "Cветодиодная лента COB",
+        "slug": "cvetodiodnaya-lenta-cob"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+        "name": "Cветодиодная лента RGB",
+        "slug": "cvetodiodnaya-lenta-rgb"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+        "name": "Cветодиодная лента SPI",
+        "slug": "cvetodiodnaya-lenta-spi"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+        "name": "Блоки питания серия BASE 24V",
+        "slug": "bloki-pitaniya-seriya-base-24v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+        "name": "Блоки питания серия BASE 48V",
+        "slug": "bloki-pitaniya-seriya-base-48v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+        "name": "Блоки питания серия DIN 24V",
+        "slug": "bloki-pitaniya-seriya-din-24v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 10,
+    "fields": {
+        "name": "Блоки питания серия DIN 48V",
+        "slug": "bloki-pitaniya-seriya-din-48v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 11,
+    "fields": {
+        "name": "Блоки питания серия MINI 24V",
+        "slug": "bloki-pitaniya-seriya-mini-24v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 12,
+    "fields": {
+        "name": "Блоки питания серия MULTI 24V",
+        "slug": "bloki-pitaniya-seriya-multi-24v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 13,
+    "fields": {
+        "name": "Блоки питания серия WP 24V",
+        "slug": "bloki-pitaniya-seriya-wp-24v"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 14,
+    "fields": {
+        "name": "Управление светом NOVA",
+        "slug": "upravlenie-svetom-nova"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 15,
+    "fields": {
+        "name": "Управление светом SPI",
+        "slug": "upravlenie-svetom-spi"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 16,
+    "fields": {
+        "name": "Управление светом STAR",
+        "slug": "upravlenie-svetom-star"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 17,
+    "fields": {
+        "name": "Управление светом TOUCH",
+        "slug": "upravlenie-svetom-touch"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 18,
+    "fields": {
+        "name": "Трековые системы",
+        "slug": "trekovye-sistemy"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 19,
+    "fields": {
+        "name": "Светильники",
+        "slug": "svetilniki"
+    }
+}
+]

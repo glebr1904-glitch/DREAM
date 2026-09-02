@@ -1,0 +1,304 @@
+{% load static %}
+{% load categories_tags %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'deps/css/bootstrap/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="{%static 'deps/css/my_css.css' %} ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { padding-top: 110px; }
+    </style>
+
+{% block css %}{% endblock %}
+    <title>{{title}}</title>
+    
+
+
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        
+            <nav class="navbar navbar-expand-lg bg-opacity-75 py-3 fixed-top"  data-bs-theme="dark" style="background-color: #9B111E;">
+                <div class="container ">
+                    <a class="navbar-brand text-white fs-3 " href="{% url 'main:index'%}">ДРИМ</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown ">
+                                <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Информация
+                                </a>
+                                <ul class="dropdown-menu  bg-opacity-75" style="background-color: #9B111E;">
+                                    <li><a class="dropdown-item  text-white " href="#">Доставка и оплата</a></li>
+                                    <li><a class="dropdown-item  text-white " href="#">Контактная информация</a></li>
+                                    <li><a class="dropdown-item  text-white " href="{% url 'main:about'%}">Про нас</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  text-white fs-5" href="carts/cart.html">Корзина</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  text-white fs-5" href="users/login.html">Войти</a>
+                            </li>
+                            <li class="nav-item dropdown ">
+                                <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Мой профиль
+                                </a>
+                                <ul class="dropdown-menu  bg-opacity-75" style="background-color: #9B111E;">
+                                    <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
+                                    <li><a class="dropdown-item  text-white" href="users/profile.html">Личный кабинет</a>
+                                    </li>
+                                    <li><a class="dropdown-item  text-white" href="{% url 'admin:index'%}">Админ панель</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item  text-white" href="#">Выйти</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex " role="search" action="{% url 'catalog:search' %}" method="get">
+                            <input class="form-control me-2" type="search" name="q" placeholder="Поиск..." aria-label="Search" style="font-size: 1.3rem; letter-spacing: 0.05em;">
+                            <button class="btn  text-white" type="submit" style="font-size: 1.3rem; letter-spacing: 0.05em; background-color: #7e6262;">Поиск</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+
+            <section>
+                <div class="container">
+                    <div class="row mt-1 position-fixed z-3">
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-dark btn-lg dropdown-toggle d-flex align-items-center gap-2"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <img src="{% static 'deps/icons/grid-fill.svg' %}"
+                                    alt="Catalog Icon"
+                                    width="36"
+                                    height="36">
+                                Каталог
+                            </button>
+                            <ul class="dropdown-menu bg-dark overflow-auto "  data-bs-theme="dark" style="max-height: 250px;">
+                                {%get_categories_tag as categories%}
+                                {%for category in categories%}
+                                <li><a class="dropdown-item text-white" href="{% url 'catalog:index' category.slug %}">{{category.name}}</a></li>
+                                {%endfor%}
+                            </ul>
+                        </div>
+
+
+
+                        <div>
+                            <button type="button" class="btn btn-lg btn-dark btn-secondary d-flex" id="modalButton"
+                                aria-expanded="false">
+                                <img class="mx-1" src="{%static 'deps/icons/basket2-fill.svg'%}" 
+                                    alt="Catalog Icon" 
+                                    width="36"
+                                    height="36">
+                                <span id="goods-in-cart-count">0</span>
+                            </button>
+                        </div>
+                        <!-- Разметка модального окна корзины -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3 class="text-center mb-4">Корзина</h3>
+                                        <div class="container" id="cart-items-container">
+                                            <!-- Разметка корзины -->
+                                            <div class="card mb-3 text-bg-light shadow-lg">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">Товар</h5>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <div class="row text-center">
+                                                            <div class="col p-0">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-dark btn-sm decrement"
+                                                                            data-cart-id="" data-cart-change-url="">-</button>
+                                                                    </span>
+                                                                    <input type="text" class="form-control number" value="1"
+                                                                        readonly>
+                                                                    <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-dark btn-sm increment"
+                                                                            data-cart-id="" data-cart-change-url="">+</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col p-0">
+                                                                <p>x 100.00 = </p>
+                                                            </div>
+                                                            <div class="col p-0"><strong>100.00 $</strong></div>
+                                                            <div class="col p-0">
+                                                                <a href="#" class="remove-from-cart" data-cart-id="">
+                                                                    <img class="mx-1" src="{%static 'deps/icons/trash3-fill.svg'%}"
+                                                                        alt="Catalog Icon" width="16" height="16">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="card mb-3 shadow-lg">
+                                                <div class="card-footer">
+                                                    <p class="float-left">Итого <strong>1</strong> товар(а) на сумму</p>
+                                                    <h4 class="float-left"><strong>100.00 $</strong></h4>
+                                                </div>
+                                            </div>
+                                            <!-- Закончилась разметка корзины -->
+                                        </div>
+                                        <a class="btn btn-dark" href="orders/create_order.html">
+                                            Оформить заказ
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Закончилась разметка модального окна -->
+                    </div>
+                </div>
+                <!-- Контент -->
+                
+                    {% block content %}{% endblock %}
+            
+            </section>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+{% comment %} Приглашаем к сотрудничеству партнеров на взаимовыгодных условиях {% endcomment %}
+
+    <footer class="py-4 fixed-bottom" style="background-color: #9B111E;">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                
+                <!-- Логотип -->
+                <div class="col-md-3 col-12 mb-4 mb-md-0 text-md-start text-center">
+                    <a href="{% url 'main:index' %}" class="text-decoration-none d-inline-block">
+                        <img src="{% static 'deps/images/dream_logotip2.jpg' %}" 
+                            alt="Логотип DREAM" 
+                            class="img-fluid rounded-circle" 
+                            style="width: 180px; height: 180px; object-fit: cover;">
+                    </a>
+                </div>
+
+                <!-- Контакты -->
+                <div class="col-md-3 col-12 mb-4 mb-md-0">
+                    <ul class="list-unstyled text-white mb-0" >
+                        <li class="mb-3" style="font-size: 1.2rem; letter-spacing: 0.05em;" >
+                            <strong style="font-size: 1.7rem; letter-spacing: 0.05em;">Телефон:</strong><br>
+                            +7 (989) 615-73-77
+                        </li>
+                        <li style="font-size: 1.2rem; letter-spacing: 0.05em;">
+                            <strong style="font-size: 1.7rem; letter-spacing: 0.05em;">График работы:</strong><br>
+                            Пн-Вс: 8:00–20:00<br>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Адрес -->
+                <div class="col-md-3 col-12 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3 fw-bold" style="font-size: 2rem; letter-spacing: 0.05em;">Адрес</h5>
+                    <p class="text-white mb-0" style="font-size: 1.3rem; letter-spacing: 0.05em;">
+                        г. Аксай, Ростовская обл.,<br>
+                        Новый Аксай, ТЦ М4 МОЛЛ
+                    </p>
+                </div>
+
+                
+                    <div class="col-md-3 col-12 d-flex flex-column align-items-md-end align-items-center justify-content-center gap-3">
+                    <h5 class="text-white  fw-bold text-uppercase mb-0" style="width: 286px; height: 60px; font-size: 1.8rem; letter-spacing: 0.05em;">
+                        Наши соцсети 
+                    </h5>
+
+
+                    <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
+                        <a href="https://t.me/Dream_Rostov_161" class="text-white bg-white bg-opacity-10 rounded-circle p-3 text-decoration-none d-flex align-items-center justify-content-center" style="width: 64px; height: 64px;" title="Telegram">
+                            <i class="fa-brands fa-telegram fa-2x"></i>
+                        </a>
+                        <a href="https://vk.link/dream__161" class="text-white bg-white bg-opacity-10 rounded-circle p-3 text-decoration-none d-flex align-items-center justify-content-center" style="width: 64px; height: 64px;" title="VK">
+                            <i class="fa-brands fa-vk fa-2x"></i>
+                        </a>
+                        <a href="https://instagram.com/dream_161_" class="text-white bg-white bg-opacity-10 rounded-circle p-3 text-decoration-none d-flex align-items-center justify-content-center" style="width: 64px; height: 64px;" title="Instagram">
+                            <i class="fa-brands fa-instagram fa-2x"></i>
+                        </a>
+                        <a href="https://max.ru/join/tG8EUxA2NbRg_rSJRBTJ0SetZ-bjf66Y8lNNo0rSeS4" class="text-white bg-white bg-opacity-10 rounded-circle p-3 text-decoration-none d-flex align-items-center justify-content-center" style="width: 64px; height: 64px;" title="MAX">
+                            <span class="fw-bold" style="font-size: 1.8rem;">M</span>
+                        </a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </footer>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="{%static 'deps/js/jquery/jquery-3.7.0.min.js'%}"></script>
+    <script src="{%static 'deps/js/jquery-events.js'%}"></script>
+    <script src="{%static 'deps/js/jquery-ajax.js'%}"></script>
+    <script src="{%static 'deps/js/bootstrap/bootstrap.bundle.min.js'%}"></script>
+</body> 
+
+</html>    
+
+
+

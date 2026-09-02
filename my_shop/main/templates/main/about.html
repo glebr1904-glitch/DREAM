@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{%static 'deps/css/my_footer_css.css'%}">{%endblock%}
+
+
+
+{% block content %}
+    <div class="my-5 mx-4 mk-5 pt-5 px-3 pb-3  custom-shadow rounded"  style="  background-color: #9B111E;">
+        <h2 class="m-2 text-white"><strong>{{title}}</strong></h2>
+        <p class="m-2 text-white" style="font-size: 1.2rem;">{{about}}</p>
+    </div>
+{% endblock %}
+
+
