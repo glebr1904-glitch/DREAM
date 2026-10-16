@@ -1,8 +1,5 @@
 body {
-    /* padding-bottom должен быть больше высоты футера. 
-       У тебя футер высокий (логотип 180px + текст), поэтому ставим 350px с запасом */
-
-    
+    padding-top: 100px;   
     background-image: url("../images/dream.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;

@@ -7,7 +7,7 @@ def index(request):
         
         "title":"Главная страница",
         "header1":"ДРИМ  ",
-        "header2":"Cветодиодная продукция                       YOULED ",
+        "header2":"Cветодиодная продукция YOULED ",
         "header3":"Освещение и Трековые системы ",
         "categories":categories,  
 

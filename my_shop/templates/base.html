@@ -11,11 +11,9 @@
     <link rel="stylesheet" href="{%static 'deps/css/bootstrap/bootstrap.min.css' %} ">
     <link rel="stylesheet" href="{%static 'deps/css/my_css.css' %} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { padding-top: 110px; }
-    </style>
+    
 
-{% block css %}{% endblock %}
+    {% block css %}{% endblock %}
     <title>{{title}}</title>
     
 
@@ -23,7 +21,7 @@
 
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" >
     <header>
         
             <nav class="navbar navbar-expand-lg bg-opacity-75 py-3 fixed-top"  data-bs-theme="dark" style="background-color: #9B111E;">
@@ -51,7 +49,7 @@
                                 <a class="nav-link  text-white fs-5" href="carts/cart.html">Корзина</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link  text-white fs-5" href="users/login.html">Войти</a>
+                                <a class="nav-link  text-white fs-5" href="{% url "user:login" %}">Войти</a>
                             </li>
                             <li class="nav-item dropdown ">
                                 <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button"
@@ -60,13 +58,13 @@
                                 </a>
                                 <ul class="dropdown-menu  bg-opacity-75" style="background-color: #9B111E;">
                                     <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
-                                    <li><a class="dropdown-item  text-white" href="users/profile.html">Личный кабинет</a>
+                                    <li><a class="dropdown-item  text-white" href="{% url "user:profile" %}">Личный кабинет</a>
                                     </li>
                                     <li><a class="dropdown-item  text-white" href="{% url 'admin:index'%}">Админ панель</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item  text-white" href="#">Выйти</a></li>
+                                    <li><a class="dropdown-item  text-white" href="{% url "user:logout" %}">Выйти</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -90,11 +88,11 @@
                                     aria-expanded="false">
                                 <img src="{% static 'deps/icons/grid-fill.svg' %}"
                                     alt="Catalog Icon"
-                                    width="36"
-                                    height="36">
+                                    width="48"
+                                    height="48">
                                 Каталог
                             </button>
-                            <ul class="dropdown-menu bg-dark overflow-auto "  data-bs-theme="dark" style="max-height: 250px;">
+                            <ul class="dropdown-menu bg-dark overflow-auto fs-5"  data-bs-theme="dark" style="max-height: 250px; min-width: 350px;">
                                 {%get_categories_tag as categories%}
                                 {%for category in categories%}
                                 <li><a class="dropdown-item text-white" href="{% url 'catalog:index' category.slug %}">{{category.name}}</a></li>
@@ -109,8 +107,8 @@
                                 aria-expanded="false">
                                 <img class="mx-1" src="{%static 'deps/icons/basket2-fill.svg'%}" 
                                     alt="Catalog Icon" 
-                                    width="36"
-                                    height="36">
+                                    width="48"
+                                    height="48">
                                 <span id="goods-in-cart-count">0</span>
                             </button>
                         </div>
@@ -180,10 +178,15 @@
                         <!-- Закончилась разметка модального окна -->
                     </div>
                 </div>
-                <!-- Контент -->
+
+
                 
-                    {% block content %}{% endblock %}
-            
+                <!-- Контент -->
+                        <section class="pb-5" style="padding-bottom: 250px !important;">
+                            {% block content %}{% endblock %}
+                        </section>
+
+                    
             </section>
 
 
@@ -200,7 +203,7 @@
 
 {% comment %} Приглашаем к сотрудничеству партнеров на взаимовыгодных условиях {% endcomment %}
 
-    <footer class="py-4 fixed-bottom" style="background-color: #9B111E;">
+    <footer class="py-4 fixed-bottom d-none d-lg-block" style="background-color: #9B111E;">
         <div class="container">
             <div class="row g-4 align-items-center">
                 
@@ -238,7 +241,7 @@
                 </div>
 
                 
-                    <div class="col-md-3 col-12 d-flex flex-column align-items-md-end align-items-center justify-content-center gap-3">
+                <div class="col-md-3 col-12 d-flex flex-column align-items-md-end align-items-center justify-content-center gap-3">
                     <h5 class="text-white  fw-bold text-uppercase mb-0" style="width: 286px; height: 60px; font-size: 1.8rem; letter-spacing: 0.05em;">
                         Наши соцсети 
                     </h5>

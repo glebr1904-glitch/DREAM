@@ -5,3 +5,5 @@ register=template.Library()
 @register.simple_tag()
 def  get_categories_tag():
     return Category.objects.all()
+
+

@@ -76,26 +76,26 @@
                                         <a href="{% url 'catalog:product' product.slug %}">
                                             <p class="card-title">
                                                 {% autoescape off %}
-                                                    {% if product.headline %}
-                                                    {{product.headline}}
-                                                    {% else %}
-                                                    {{product.name}}
-                                                    {% endif %}
+                                                {% if product.headline  %}
+                                                {{product.headline}}
+                                                {% else %} 
+                                                {{product.name}}
+                                                {% endif %}
                                                 {% endautoescape %}
                                             </p>
                                         </a>
                                         
-                                        <p class="card-text">{{product.description|truncatechars:120}}</p>
+                                        <p class="card-text">{% autoescape off %}{{product.description|truncatechars:120}}{% endautoescape %}</p>
                                             
                                     <p class="product_id">id {{product.display_id}}</p>
                                     <div class="d-flex justify-content-between">
 
                                     {%if product.discounts%}    
-                                        <p><s>{{product.price}}/1 пог. м</s> </p>
-                                        <p><strong>{{product.sell_price}} руб./1 пог. м</strong></p>
+                                        <p><s>{{product.price}}</s></p>
+                                        <p><strong>{{product.sell_price}}</strong></p>
                                         <span class="badge bg-warning text-dark">Скидка {{product.discounts}}.00 %</span>
                                     {%else%}
-                                        <p><strong>{{product.price}} руб.</strong>/1 пог. м</p>
+                                        <p><strong>{{product.price}} руб.</strong></p>
                                     {%endif%}
                                         <!-- <p><strong>100.00 $</strong></p> -->
                                         <a href="#" class="btn add-to-cart">

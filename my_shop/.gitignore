@@ -8,6 +8,8 @@ __pycache__/
 *\$py.class
 *.so
 
+__init__.py
+__pycache__
 # Файлы IDE
 .idea/
 .vscode/
@@ -19,11 +21,4 @@ __pycache__/
 tmp/
 temp/
 
-# Файлы ОС
-.DS_Store
-Thumbs.db
 
-# Пакеты зависимостей (если не хочешь их хранить)
-dist/
-build/
-*.egg-info
