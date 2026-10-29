@@ -49,6 +49,7 @@
                             
                             {% for effectiv in effectiveness %}
                                 <div class="form-check mb-2">
+                                    
                                     <!-- name должен быть одинаковым для всей группы, чтобы выбрать только 1 вариант -->
                                     <input class="form-check-input fs-5" type="radio" name="effectiveness" id="effect_{{ effectiv.id }}" value="{{ effectiv.id }}">
                                     <label class="form-check-label fs-5" for="effect_{{ effectiv.id }}" style="cursor: pointer;">
@@ -72,7 +73,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="imageModal1Label">{{product.name}}</h5>
+                                <h5 class="modal-title" id="imageModal1Label">{% autoescape off %}{{product.name}}{% endautoescape %}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Закрыть"></button>
                             </div>
@@ -89,7 +90,7 @@
              
             <div class="card-body">
                 <p class="card-text fs-4">Цена: <strong>{{product.sell_price}} р</strong></p>
-                <h5 class="card-title fs-4">{{product.name}}</h5>
+                <h5 class="card-title fs-4">{% autoescape off %}{{product.name}}{% endautoescape %}</h5>
                 
                 <p class="product_id mt-3 fs-4">id {{product.display_id}}</p>
 

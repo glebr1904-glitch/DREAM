@@ -35,14 +35,11 @@ def catalog(request,category_slug=None):
 
 def product(request,product_slug):
     product=Product.objects.get(slug=product_slug)
-    # effectiveness=Effectiveness.objects.all()
-    # color_temperature=Color_temperature.objects.get()
     
     context={
     "title":"Продукт",
     "product":product,
-    # "effectiveness":effectiveness,
-    # "color_temperature":color_temperature
+
     }
     return render(request, 'products/product.html',context)
 

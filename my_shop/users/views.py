@@ -1,11 +1,18 @@
 from django.shortcuts import render
-# from users.forms import UserLoginForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from users.forms import (
+    UserLoginForm,
+                         
+    )
+
+
 
 def login(request):
+    if request.method == "POST":
+        form=UserLoginForm(data=request.POST)
     context={
         "title":"Логин",
 
@@ -32,4 +39,4 @@ def profile(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('main:index'))
