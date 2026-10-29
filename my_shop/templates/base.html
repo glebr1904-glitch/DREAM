@@ -1,6 +1,10 @@
 {% load static %}
 {% load categories_tags %}
 
+{% if form.non_field_errors %}
+    {% include "includes/notifications.html" %}
+{% endif %} 
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -34,6 +38,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            
                             <li class="nav-item dropdown ">
                                 <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,13 +50,32 @@
                                     <li><a class="dropdown-item  text-white " href="{% url 'main:about'%}">Про нас</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link  text-white fs-5" href="carts/cart.html">Корзина</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link  text-white fs-5" href="{% url "user:login" %}">Войти</a>
-                            </li>
-                            <li class="nav-item dropdown ">
+                            
+                            {% if not user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link  text-white fs-5" href="{% url "user:login" %}">Войти</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link  text-white fs-5" href="carts/cart.html">Корзина</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  text-white fs-5" href="{% url "user:profile" %}">Личный кабинет</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  text-white fs-5" href="carts/cart.html">Сотрудничество</a>
+                                </li>
+                                {% if user.is_staff or user.is_admin%}
+                                    <li class="nav-item">
+                                        <a class="nav-link  text-white fs-5" href="{% url 'admin:index'%}">Админ панель</a>
+                                    </li>
+                                {% endif %}
+
+                                <li class="nav-item">
+                                    <a class="nav-link  text-white fs-5" href="{% url "user:logout" %}">Выйти</a>
+                                </li>
+                            {% endif %}
+                            {% comment %} <li class="nav-item dropdown ">
                                 <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Мой профиль
@@ -66,7 +90,7 @@
                                     </li>
                                     <li><a class="dropdown-item  text-white" href="{% url "user:logout" %}">Выйти</a></li>
                                 </ul>
-                            </li>
+                            </li> {% endcomment %}
                         </ul>
                         <form class="d-flex " role="search" action="{% url 'catalog:search' %}" method="get">
                             <input class="form-control me-2" type="search" name="q" placeholder="Поиск..." aria-label="Search" style="font-size: 1.3rem; letter-spacing: 0.05em;">
