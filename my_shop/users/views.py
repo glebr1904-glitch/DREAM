@@ -5,8 +5,9 @@ from django.urls import reverse
 
 from users.forms import (
     UserLoginForm,
-    UserRegistrationForm
-    )
+    UserRegistrationForm,
+    ProfileForm
+)
 
 
 
@@ -33,12 +34,13 @@ def login(request):
 
 def register(request):
     if request.method == "POST":
-        form=UserRegistrationForm(data=request.POST)
+        form=UserRegistrationForm(data=request.POST, 
+                                  files=request.FILES)
         if form.is_valid():
             form.save()
             user=form.instance
             auth.login(request, user)
-            return HttpResponseRedirect(reverse("user:login"))
+            return HttpResponseRedirect(reverse("main:index"))
     else:
         form=UserRegistrationForm()
 
@@ -50,11 +52,15 @@ def register(request):
 
 
 def profile(request):
-
-
-
-
-
+    if request.method == "POST":
+        form=ProfileForm(data=request.POST, 
+                        instance=request.user,
+                        files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("user:profile"))
+    else:
+        form=ProfileForm(instance=request.user)
 
     context={
         "title":"Профиль",

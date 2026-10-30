@@ -1,0 +1,42 @@
+[
+{
+    "model": "products.effectiveness",
+    "pk": 6,
+    "fields": {
+        "name": "160",
+        "slug": "160"
+    }
+},
+{
+    "model": "products.effectiveness",
+    "pk": 7,
+    "fields": {
+        "name": "165",
+        "slug": "165"
+    }
+},
+{
+    "model": "products.effectiveness",
+    "pk": 8,
+    "fields": {
+        "name": "170",
+        "slug": "170"
+    }
+},
+{
+    "model": "products.effectiveness",
+    "pk": 9,
+    "fields": {
+        "name": "175",
+        "slug": "175"
+    }
+},
+{
+    "model": "products.effectiveness",
+    "pk": 10,
+    "fields": {
+        "name": "180",
+        "slug": "180"
+    }
+}
+]

@@ -1,0 +1,114 @@
+[
+{
+    "model": "products.color_temperature",
+    "pk": 15,
+    "fields": {
+        "name": "1800K",
+        "slug": "1800k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 16,
+    "fields": {
+        "name": "2700K",
+        "slug": "2700k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 17,
+    "fields": {
+        "name": "3000K",
+        "slug": "3000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 18,
+    "fields": {
+        "name": "4000K",
+        "slug": "4000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 19,
+    "fields": {
+        "name": "6000K",
+        "slug": "6000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 20,
+    "fields": {
+        "name": "Белый (Тёплый) 3000К",
+        "slug": "belyj-tyoplyj-3000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 21,
+    "fields": {
+        "name": "Белый (Нейтральный) 4000К",
+        "slug": "belyj-nejtralnyj-4000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 22,
+    "fields": {
+        "name": "Белый (Холодный) 6000К",
+        "slug": "belyj-holodnyj-6000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 23,
+    "fields": {
+        "name": "Белый (Регулируемый) 1800К-6000К",
+        "slug": "belyj-reguliruemyj-1800k-6000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 24,
+    "fields": {
+        "name": "RGB",
+        "slug": "rgb"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 25,
+    "fields": {
+        "name": "RGB + Белый (Тёплый) 3000К",
+        "slug": "rgb-belyj-tyoplyj-3000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 26,
+    "fields": {
+        "name": "RGB + Белый (Нейтральный) 4000К",
+        "slug": "rgb-belyj-nejtralnyj-4000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 27,
+    "fields": {
+        "name": "RGB + Белый (Холодный) 6000К",
+        "slug": "rgb-belyj-holodnyj-6000k"
+    }
+},
+{
+    "model": "products.color_temperature",
+    "pk": 28,
+    "fields": {
+        "name": "RGB + Белый (Ргулируемый) 3000К-6000К",
+        "slug": "rgb-belyj-rguliruemyj-3000k-6000k"
+    }
+}
+]
