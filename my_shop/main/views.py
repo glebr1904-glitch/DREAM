@@ -22,3 +22,11 @@ def about(request):
 
     }
     return render(request,'main/about.html',context)
+
+def cooperation(request):
+    context={
+        'title':'Сотрудничество',
+        'cooperation':"Мы открыты к сотрудничеству с другими компаниями и индивидуальными предпринимателями. Если вы заинтересованы в партнерстве, пожалуйста, свяжитесь с нами для обсуждения возможностей сотрудничества."
+
+    }
+    return render(request,'main/cooperation.html',context)

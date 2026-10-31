@@ -8,8 +8,17 @@ body {
     margin: 0;
 }
 
+
+
 .dropdown-toggle::after {
   content: none;
+}
+
+  
+.navbar .nav-item.dropdown > .dropdown-menu .dropdown-item:hover,
+.navbar .nav-item.dropdown > .dropdown-menu .dropdown-item:focus {
+    background-color: #7e6262 !important;
+    color: #fff !important;
 }
 
 .custom-shadow {
@@ -36,4 +45,13 @@ body {
   top: 80%;
   border-radius: 15px;
   font-size: 0.7rem;
+}
+
+.product-description {
+    line-height: 1.5;
+    min-height: 4.5em;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

@@ -62,51 +62,78 @@
                                 <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
                             </form>
                         </div>
-                        <!-- Карта товара -->
-                        {%for product in products %}
-                        <div class="col-lg-4 col-md-6 p-4 ">
-                            <div class="card border-primary rounded custom-shadow w-100">
-                                {%if product.image%}
-                                     <img src={{product.image.url}} class="card-img-top" alt="{{product.name}}" style="height: 200px; object-fit: cover;">
-                                {%else%}
-                                    <img src="{%static 'deps/images/not-found-image.png'%}" class="card-img-top" alt="Нет изображения" style="height: 200px; object-fit: cover;">
-                                {%endif%}
-                                <div class="card-body">
-                                    
-                                        <a href="{% url 'catalog:product' product.slug %}">
-                                            <p class="card-title">
-                                                {% autoescape off %}
-                                                {% if product.headline  %}
-                                                {{product.headline}}
-                                                {% else %} 
-                                                {{product.name}}
-                                                {% endif %}
-                                                {% endautoescape %}
-                                            </p>
-                                        </a>
-                                        
-                                        <p class="card-text">{% autoescape off %}{{product.description|truncatechars:120}}{% endautoescape %}</p>
-                                            
-                                    <p class="product_id">id {{product.display_id}}</p>
-                                    <div class="d-flex justify-content-between">
-
-                                    {%if product.discounts%}    
-                                        <p><s>{{product.price}}</s></p>
-                                        <p><strong>{{product.sell_price}}</strong></p>
-                                        <span class="badge bg-warning text-dark">Скидка {{product.discounts}}.00 %</span>
+                        {% if products %}
+                            {%for product in products %}
+                            <div class="col-lg-4 col-md-6 p-4 d-flex">
+                                <div class="card border-primary rounded custom-shadow w-100 h-100"> 
+                                    {%if product.image%}
+                                        <img src={{product.image.url}} class="card-img-top" alt="{{product.name}}" style="height: 200px; object-fit: cover;">
                                     {%else%}
-                                        <p><strong>{{product.price}} руб.</strong></p>
+                                        <img src="{%static 'deps/images/not-found-image.png'%}" class="card-img-top" alt="Нет изображения" style="height: 200px; object-fit: cover;">
                                     {%endif%}
-                                        <!-- <p><strong>100.00 $</strong></p> -->
-                                        <a href="#" class="btn add-to-cart">
-                                            <img class="mx-1" src="{% static 'deps/icons/cart-plus.svg'%}" alt="Catalog Icon"
-                                                width="32" height="32">
-                                        </a>
+                                    <div class="card-body d-flex flex-column">
+                                        
+                                            <a href="{% url 'catalog:product' product.slug %}">
+                                                <p class="card-title">
+                                                    {% autoescape off %}
+                                                    {% if product.headline  %}
+                                                    {{product.headline}}
+                                                    {% else %} 
+                                                    {{product.name}}
+                                                    {% endif %}
+                                                    {% endautoescape %}
+                                                </p>
+                                            </a>
+                                            
+                                            <p class="card-text product-description">
+                                                {% autoescape off %}{{ product.description }}{% endautoescape %}
+                                            </p>
+                                                
+                                        <p class="product_id">id {{product.display_id}}</p>
+                                        <div class="d-flex justify-content-between">
+
+                                        {%if product.discounts%}    
+                                            <p><s>{{product.price}}</s></p>
+                                            <p><strong>{{product.sell_price}}</strong></p>
+                                            <span class="badge bg-warning text-dark">Скидка {{product.discounts}}.00 %</span>
+                                        {%else%}
+                                            <p><strong>{{product.price}} руб.</strong></p>
+                                        {%endif%}
+                                            <!-- <p><strong>100.00 $</strong></p> -->
+                                            <a href="#" class="btn add-to-cart">
+                                                <img class="mx-1" src="{% static 'deps/icons/cart-plus.svg'%}" alt="Catalog Icon"
+                                                    width="32" height="32">
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {%endfor%}
+                            {%endfor%}
+                        {% else %}
+                            <div class="col-12 d-flex justify-content-center py-5">
+                                <div class="card border-0 shadow-sm rounded-4 text-center p-4 p-md-5 w-100" style="max-width: 640px;">
+                                    <div class="mx-auto mb-4 d-flex align-items-center justify-content-center rounded-circle"
+                                        style="width: 76px; height: 76px; background-color: rgba(155, 17, 30, 0.1); color: #9B111E;">
+                                        <i class="fa-solid fa-magnifying-glass fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <h2 class="h4 mb-2">Ничего не найдено</h2>
+                                    {% if request.GET.q %}
+                                        <p class="text-muted mb-4">
+                                            По запросу «{{ request.GET.q }}» товары не нашлись.
+                                            Попробуйте изменить запрос или посмотреть весь каталог.
+                                        </p>
+                                    {% else %}
+                                        <p class="text-muted mb-4">В этой категории пока нет товаров.</p>
+                                    {% endif %}
+                                    <a href="{% url 'catalog:index' 'all' %}" class="btn text-white mx-auto px-4"
+                                        style="background-color: #9B111E;">
+                                        Перейти в каталог
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <!-- Карта товара -->
+                        
                         <!-- Карта товара -->
                     </div>
                     {% comment %} <!-- Пагинация -->
@@ -138,7 +165,6 @@
                         </ul>
                     </nav>
 {% endblock %}
-
 
 
 

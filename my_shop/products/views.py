@@ -23,7 +23,6 @@ def catalog(request,category_slug=None):
     if order_by and order_by!="default":
         products=products.order_by(order_by)
 
-    products=get_list_or_404(products)
 
     context={
         "title":"Каталог",

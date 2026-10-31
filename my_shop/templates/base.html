@@ -1,10 +1,6 @@
 {% load static %}
 {% load categories_tags %}
 
-{% if form.non_field_errors %}
-    {% include "includes/notifications.html" %}
-{% endif %} 
-
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -28,7 +24,7 @@
 <body class="d-flex flex-column min-vh-100" >
     <header>
         
-            <nav class="navbar navbar-expand-lg bg-opacity-75 py-3 fixed-top"  data-bs-theme="dark" style="background-color: #9B111E;">
+            <nav class="navbar navbar-expand-lg bg-opacity-75 py-3 fixed-top"  data-bs-theme="dark" style="color: #fff; background-color: #9B111E;">
                 <div class="container ">
                     <a class="navbar-brand text-white fs-3 " href="{% url 'main:index'%}">ДРИМ</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -63,7 +59,7 @@
                                     <a class="nav-link  text-white fs-5" href="{% url "user:profile" %}">Личный кабинет</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link  text-white fs-5" href="carts/cart.html">Сотрудничество</a>
+                                    <a class="nav-link  text-white fs-5" href="{% url "main:cooperation" %}">Сотрудничество</a>
                                 </li>
                                 {% if user.is_staff or user.is_admin%}
                                     <li class="nav-item">
@@ -101,6 +97,9 @@
             </nav>
         </header>
         
+        {% if form.non_field_errors %}
+            {% include "includes/notifications.html" %}
+        {% endif %}
 
             <section>
                 <div class="container">
@@ -326,6 +325,5 @@
 </body> 
 
 </html>    
-
 
 

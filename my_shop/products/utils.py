@@ -15,7 +15,7 @@ def q_search(query):
 
 
     vector=SearchVector('name')
-    query_objects=SearchQuery(query)
+    query_objects=SearchQuery(query,search_type="websearch")
 
     query_res=(Product.objects.annotate(
         rank=SearchRank(vector, query_objects)
